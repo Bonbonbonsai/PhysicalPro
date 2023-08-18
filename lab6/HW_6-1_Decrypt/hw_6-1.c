@@ -22,7 +22,6 @@ int main() {
             }
         }
     }
-    decrypt[string_len] = '\0';
     printf("%s", decrypt);
     return 0;
 }
