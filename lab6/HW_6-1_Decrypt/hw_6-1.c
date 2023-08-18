@@ -2,27 +2,27 @@
 #include <string.h>
 #include <ctype.h>
 int main() {
-    char upper_crypt[] = "ABXYPQRMNCEDKLJOSHTUFVZGWIABXYP";
-    char lower_crypt[] = "abxypqrmncedkljoshtufvzgwiabxyp";
+    char crypt[] = "ABXYPQRMNCEDKLJOSHTUFVZGWI";
     char string[200];
+    char decrypt[200];
     scanf("%[^\n]", string);
-    for (int i = 0; i < strlen(string); i++) {
-        for (int j = 0; j < strlen(upper_crypt); j++) {
-            if (isspace(string[i])) {
-                printf(" ");
-            }
-            else if (islower(string[i])) {
-                if (strcmp(string[i], lower_crypt[j]) == 0) {
-                    printf("%s", lower_crypt[j+5]);
-                }
-            }
-            else {
-                if (strcmp(string[i], upper_crypt[j]) == 0) {
-                    printf("%s", upper_crypt[j+5]);
+    int string_len = strlen(string);
+    int crypt_len = strlen(crypt);
+    for (int i = 0; i < string_len; i++) {
+        if (isspace(string[i])) {
+            decrypt[i] = ' ';
+        }
+        else {
+            char upper_letter = toupper(string[i]);
+            for (int j = 0; j < crypt_len; j++) {
+                if (upper_letter == crypt[j]) {
+                    decrypt[i] = crypt[(j+5) % crypt_len];
+                    break;
                 }
             }
         }
     }
-    printf("\n");
+    decrypt[string_len] = '\0';
+    printf("%s", decrypt);
     return 0;
 }
